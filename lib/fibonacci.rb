@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-def fibs_rec(val)
-  return val if val.zero? || val == 1
+def fibs_rec(val, rec_arr)
+  # return val if val < 2
 
-  fibs_rec(val - 1) + fibs_rec(val - 2)
+  rec_arr[val] = val < 2 ? val : fibs_rec(val - 1, rec_arr) + fibs_rec(val - 2, rec_arr)
 end
 
 def fibs(val)
@@ -11,8 +11,10 @@ def fibs(val)
   (0..val).each do |n|
     fib_arr << (fib_arr[n - 2] + fib_arr[n - 1]) if n > 1
   end
-  fib_arr[val]
+  fib_arr
 end
 
-puts fibs_rec(6)
-puts fibs(6)
+rec_arr = []
+fibs_rec(6, rec_arr)
+print rec_arr
+print fibs(6)
